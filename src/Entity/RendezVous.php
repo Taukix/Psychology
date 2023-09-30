@@ -29,6 +29,10 @@ class RendezVous
     #[ORM\Column(length: 100)]
     private ?string $state = null;
 
+    #[ORM\ManyToOne(inversedBy: 'rendezVous')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Users $rdv_user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +94,18 @@ class RendezVous
     public function setState(string $state): static
     {
         $this->state = $state;
+
+        return $this;
+    }
+
+    public function getRdvUser(): ?Users
+    {
+        return $this->rdv_user;
+    }
+
+    public function setRdvUser(?Users $rdv_user): static
+    {
+        $this->rdv_user = $rdv_user;
 
         return $this;
     }
