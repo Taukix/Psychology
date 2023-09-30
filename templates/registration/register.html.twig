@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                {% if app.user %}
+                    <div class="alert alert-dark" role="alert">
+                        Vous êtes connecté en tant que {{ app.user.email }}.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    <h1 class="text-center mt-5 mb-5">Register</h1>
+
+    {{ form_errors(registrationForm) }}
+
+    {{ form_start(registrationForm, {'attr': {'class': 'form w-50 d-flex flex-column m-auto mt-5'}}) }}
+    <div class="mb-3">
+        {{ form_row(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Adresse email'}}) }}
+    </div>
+    <div class="mb-3">
+        {{ form_row(registrationForm.plainPassword, {'label': 'Mot de passe', 'attr': {'class': 'form-control', 'placeholder': 'Mot de passe'}}) }}
+    </div>
+    <div class="mb-3">
+        {{ form_row(registrationForm.confirmPassword, {'label': 'Confirmation du mot de passe', 'attr': {'class': 'form-control', 'placeholder': 'Confirmez le mot de passe'}}) }}
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Register</button>
+    <a href="{{ path('app_login') }}" class="mt-2"><u>J'ai déjà un compte</u></a>
+    {{ form_end(registrationForm) }}
+{% endblock %}
