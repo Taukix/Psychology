@@ -71,6 +71,7 @@
                 <li><a href="{{path('app_home') ~ '#services-section' }}" class="nav-link">Mes services</a></li>
                 <li><a href="{{path('app_about') ~ '#about-section' }}" class="nav-link">A Propos</a></li>
                 <li><a href="{{path('app_about') ~ '#testimonial' }}" class="nav-link">Témoignages</a></li>
+                <li><a href="{{path('app_rdv') }}" class="nav-link">Rendez-Vous</a></li>
                 <li><a href="{{path('app_blog') ~ '#blog-section' }}" class="nav-link">Blog</a></li>
                 <li><a href="{{path('app_contact') ~ '#contact-section' }}" class="nav-link">Contact</a></li>
                 {% if is_granted('ROLE_USER') %}
@@ -115,10 +116,10 @@
     <script src="js/TweenMax.min.js"></script>
     <script src="js/OBJLoader.js"></script>
     <script src="js/ParticleHead.js"></script>
-
     <script src="js/jquery.sticky.js"></script>
-
     <script src="js/typed.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js" integrity="sha256-alsi6DkexWIdeVDEct5s7cnqsWgOqsh2ihuIZbU6H3I=" crossorigin="anonymous"></script>
+    
     <script>
       var typed = new Typed('.typed-words', {
         strings: [" écoute"," Compréhension"," Réactivité"," Disponibilité"," Qualité"," Confiance"],
@@ -132,6 +133,8 @@
     </script>
 
     <script src="js/main.js"></script>
+
+    {% block javascripts %}{% endblock %}
 {% endblock %}
 </html>
 

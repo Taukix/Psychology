@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="w-100">
+            <section class="site-section" id="blog-section">
+                    <div class="container" style="margin-top: 100px">
+                      <div class="row justify-content-center mb-5 align-items-center">
+                        <div class="col-md-8 text-center">
+                          <h2 class="site-section-heading text-center">Prenez votre Rendez-vous</h2>
+                        </div>
+                      </div>
+                      <div id="calendar"></div>
+                    </div>
+            </section>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'timeGridWeek',
+            locale: 'fr',
+            timezone: 'Europe/Paris',
+            headerToolbar: {
+              left: 'prev,next',
+              center: 'title',
+              right: 'timeGridWeek,timeGridDay' // user can switch between the two
+            },
+            buttonText: {
+              today: 'Aujourd\'hui',
+              month: 'Mois',
+              week: 'Semaine',
+              day: 'Jour',
+              list: 'Liste'
+            },
+            weekends: false,
+            allDaySlot: false,
+            slotMinTime: '08:00:00',
+            slotMaxTime: '19:00:00',
+            slotDuration: '01:00:00',
+            slotLabelInterval: '01:00:00',
+            slotLabelFormat: {
+              hour: 'numeric',
+              minute: '2-digit',
+              omitZeroMinute: false,
+              meridiem: 'short'
+            },
+            height: 'auto',
+            slotLabelContent: function(arg) {
+                var hour = arg.date.getHours();
+                if (hour === 12) {
+                    return null; 
+                } else {
+                    return arg.text;
+                }
+            },
+        });
+        calendar.render();
+      });
+
+    </script>
+{% endblock %}
