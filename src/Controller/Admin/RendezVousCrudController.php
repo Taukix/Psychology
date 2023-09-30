@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\RendezVous;
+use App\Form\Type\HeureType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
@@ -10,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use App\Repository\UsersRepository;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class RendezVousCrudController extends AbstractCrudController
 {
@@ -48,7 +50,6 @@ class RendezVousCrudController extends AbstractCrudController
             ->allowMultipleChoices(false),
             DateTimeField::new('start')
                 ->setLabel('Date et heure de début')
-                ->setFormat('dd-MM-yyyy HH:mm:ss')
                 ->setrequired(true),
         ];
     }

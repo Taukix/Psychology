@@ -4,10 +4,14 @@ namespace App\Controller;
 
 use App\Repository\RendezVousRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
+use App\Entity\RendezVous;
+use App\Form\RendezVousFormType;
 
-class RdvController extends AbstractController
+class RendezVousController extends AbstractController
 {
     #[Route('/rendez-vous', name: 'app_rdv')]
     public function index(RendezVousRepository $rdv): Response
@@ -35,6 +39,29 @@ class RdvController extends AbstractController
 
         $data = json_encode($rdvs);
 
-        return $this->render('rdv.html.twig', compact('data'));
+        return $this->render('rendezVous/rdv.html.twig', compact('data'));
+    }
+
+    #[Route('/rendez-vous/create', name: 'app_rdv_create')]
+    public function create(Request $request, PersistenceManagerRegistry $doctrine): Response
+    {
+        $rendezVous = new RendezVous();
+
+        $form = $this->createForm(RendezVousFormType::class, $rendezVous);
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $rendezVous->setRdvUser($this->getUser());
+            $rendezVous->setState('Validé');
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($rendezVous);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_rdv');
+        }
+
+        return $this->render('rendezVous/create.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }
