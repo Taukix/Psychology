@@ -20,13 +20,18 @@
 
 {% block javascripts %}
     <script>
-
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'timeGridWeek',
             locale: 'fr',
             timezone: 'Europe/Paris',
+            titleFormat: {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              weekday: 'long'
+            },
             headerToolbar: {
               left: 'prev,next',
               center: 'title',
@@ -39,6 +44,7 @@
               day: 'Jour',
               list: 'Liste'
             },
+            selectable: true,
             weekends: false,
             allDaySlot: false,
             slotMinTime: '08:00:00',
@@ -61,6 +67,10 @@
                 }
             },
             events: {{ data|raw }},
+            eventClick: function(info) {
+              info.jsEvent.preventDefault();
+              window.location.href = info.event.url;
+            }
         });
         calendar.render();
       });

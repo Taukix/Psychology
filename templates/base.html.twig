@@ -73,7 +73,6 @@
                 <li><a href="{{path('app_about') ~ '#testimonial' }}" class="nav-link">Témoignages</a></li>
                 <li><a href="{{path('app_rdv') }}" class="nav-link">Rendez-Vous</a></li>
                 <li><a href="{{path('app_blog') ~ '#blog-section' }}" class="nav-link">Blog</a></li>
-                <li><a href="{{path('app_contact') ~ '#contact-section' }}" class="nav-link">Contact</a></li>
                 {% if is_granted('ROLE_USER') %}
                   <li><a href="{{path('app_logout') }}" class="nav-link bg-primary text-white rounded">Déconnexion</a></li>
                 {% else %}

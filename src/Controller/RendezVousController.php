@@ -35,6 +35,7 @@ class RendezVousController extends AbstractController
                 'backgroundColor' => $backgroundColor,
                 'borderColor' => "#03224c",
                 'textColor' => $textColor,
+                'url' => $this->generateUrl('app_rdv_show', ['id' => $event->getId()]),
             ];
         }
 
@@ -46,7 +47,7 @@ class RendezVousController extends AbstractController
     #[Route('/rendez-vous/create', name: 'app_rdv_create')]
     public function create(Request $request, PersistenceManagerRegistry $doctrine, ValidatorInterface $validator): Response
     {
-        $rendezVous = new RendezVous();
+        $rendezVous = new RendezVous($doctrine);
 
         $form = $this->createForm(RendezVousFormType::class, $rendezVous);
         $form->handleRequest($request);
@@ -71,6 +72,14 @@ class RendezVousController extends AbstractController
         return $this->render('rendezVous/create.html.twig', [
             'form' => $form->createView(),
             'errors' => null,
+        ]);
+    }
+
+    #[Route('/rendez-vous/{id}', name: 'app_rdv_show')]
+    public function show(RendezVous $rendezVous): Response
+    {
+        return $this->render('rendezVous/show.html.twig', [
+            'rendezVous' => $rendezVous,
         ]);
     }
 }

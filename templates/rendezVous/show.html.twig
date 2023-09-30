@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    {% if rendezVous.getRdvUser.id == app.user.id or 'ROLE_ADMIN' in app.user.roles %}
+        <div class="w-100"></div>
+                <section class="site-section" id="blog-section">
+                        <div class="container" style="margin-top: 100px">
+                            <div class="row justify-content-center mb-5 align-items-center">
+                              <div class="col-md-8 text-center">
+                                <h2 class="site-section-heading text-center">Rendez-Vous du {{ rendezVous.start|date('d-m-Y à H:i') }}h</h2>
+                              </div>
+                            </div>
+                            <div class="row pl-5" style="background-color: #25325b; border-radius: 30px;">
+                              <div class="col-md-12 col-lg-8 main-content">
+                                <div class="row mb-5 mt-5">
+                                  <div class="col-md-12">
+                                    <h5 class="text-white"><i class="mr-3 text-uppercase">Prénom :</i> {{ rendezVous.getRdvUser.firstName }}</h5>
+                                    <h5 class="text-white"><i class="mr-3 text-uppercase">Nom :</i> {{ rendezVous.getRdvUser.lastName }}</h5>
+                                    <h5 class="text-white"><i class="mr-3 text-uppercase">Email :</i> {{ rendezVous.getRdvUser.email }}</h5>
+                                    <h5 class="text-white"><i class="mr-3 text-uppercase">Téléphone :</i> {{ rendezVous.getRdvUser.phoneNumber }}</h5>
+                                    <h5 class="text-white"><i class="mr-3 text-uppercase">Adresse :</i> {{ rendezVous.title }}</h5>
+                                    <h5 class="text-white"><i class="mr-3 text-uppercase">Ville :</i> {{ rendezVous.description }}</h5>
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+                </section>
+        </div>
+    {% else %}
+        <div class="w-100"></div>
+                <section class="site-section" id="blog-section">
+                        <div class="container" style="margin-top: 100px">
+                            <div class="row justify-content-center mb-5 align-items-center">
+                              <div class="col-md-8 text-center">
+                                <h2 class="site-section-heading text-center">Vous ne pouvez pas accéder à ce rendez-vous</h2>
+                              </div>
+                            </div>
+                        </div>
+                </section>
+        </div>
+    {% endif %}
+{% endblock %}

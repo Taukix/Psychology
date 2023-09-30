@@ -26,7 +26,7 @@ class RendezVousCrudController extends AbstractCrudController
             TextField::new('title')
                 ->setLabel('Titre')
                 ->setRequired(true),
-            TextEditorField::new('description')
+            TextField::new('description')
                 ->setLabel('Description')
                 ->setRequired(true),
             AssociationField::new('rdv_user')

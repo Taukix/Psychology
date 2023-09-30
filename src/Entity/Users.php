@@ -34,6 +34,15 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'rdv_user', targetEntity: RendezVous::class)]
     private Collection $rendezVous;
 
+    #[ORM\Column(length: 50)]
+    private ?string $firstName = null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $lastName = null;
+
+    #[ORM\Column(length: 20, nullable: true)]
+    private ?string $phoneNumber = null;
+
     public function __construct()
     {
         $this->rendezVous = new ArrayCollection();
@@ -135,6 +144,42 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
                 $rendezVou->setRdvUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(string $firstName): static
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(string $lastName): static
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    public function getPhoneNumber(): ?string
+    {
+        return $this->phoneNumber;
+    }
+
+    public function setPhoneNumber(?string $phoneNumber): static
+    {
+        $this->phoneNumber = $phoneNumber;
 
         return $this;
     }
