@@ -67,14 +67,16 @@ class RendezVous
         return $this->start;
     }
 
-    public function setStart(\DateTimeInterface $start): static
+    public function setStart(\DateTime $start): static
     {
         $this->start = $start;
+
+        $this->end_datetime = (clone $start)->modify('+1 hour');
 
         return $this;
     }
 
-    public function getEndDatetime(): ?\DateTimeInterface
+    public function getEndDatetime(): ?\DateTime
     {
         return $this->end_datetime;
     }
@@ -82,6 +84,13 @@ class RendezVous
     public function setEndDatetime(\DateTimeInterface $end_datetime): static
     {
         $this->end_datetime = $end_datetime;
+
+        $now = new \DateTime();
+        if ($end_datetime < $now) {
+            $this->state = 'Passé';
+        } else {
+            $this->state = 'Validé';
+        }
 
         return $this;
     }

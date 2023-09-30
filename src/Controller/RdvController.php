@@ -17,6 +17,7 @@ class RdvController extends AbstractController
         $rdvs = [];
 
         foreach ($events as $event) {
+            if ($event->getState() === 'Annulé') continue;
             $backgroundColor = ($event->getState() === 'Passé') ? '#D3D3D3' : '#25325b';
             $textColor = ($event->getState() === 'Passé') ? '#000' : '#fff';
 

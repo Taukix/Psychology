@@ -39,6 +39,7 @@ class RendezVousCrudController extends AbstractCrudController
                 ->setRequired(true),
             ChoiceField::new('state')
             ->setLabel('État')
+            ->setRequired(true)
             ->setChoices([
                 'Validé' => 'Validé',
                 'Annulé' => 'Annulé',
@@ -47,10 +48,6 @@ class RendezVousCrudController extends AbstractCrudController
             ->allowMultipleChoices(false),
             DateTimeField::new('start')
                 ->setLabel('Date et heure de début')
-                ->setFormat('dd-MM-yyyy HH:mm:ss')
-                ->setrequired(true),
-            DateTimeField::new('end_datetime')
-                ->setLabel('Date et heure de fin')
                 ->setFormat('dd-MM-yyyy HH:mm:ss')
                 ->setrequired(true),
         ];
