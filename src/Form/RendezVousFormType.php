@@ -26,7 +26,9 @@ class RendezVousFormType extends AbstractType
                 'label' => 'Date et heure de début',
                 'required' => true,
                 'date_widget' => 'single_text',
-                'time_widget' => 'single_text',
+                'time_widget' => 'choice',
+                'hours' => range(8, 17),
+                'minutes' => [0],
             ])
         ;
     }

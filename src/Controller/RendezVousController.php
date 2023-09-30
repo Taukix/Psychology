@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
 use App\Entity\RendezVous;
 use App\Form\RendezVousFormType;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class RendezVousController extends AbstractController
 {
@@ -43,7 +44,7 @@ class RendezVousController extends AbstractController
     }
 
     #[Route('/rendez-vous/create', name: 'app_rdv_create')]
-    public function create(Request $request, PersistenceManagerRegistry $doctrine): Response
+    public function create(Request $request, PersistenceManagerRegistry $doctrine, ValidatorInterface $validator): Response
     {
         $rendezVous = new RendezVous();
 
@@ -58,10 +59,18 @@ class RendezVousController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('app_rdv');
+        } else if ($form->isSubmitted() && !$form->isValid()) {
+            $errors = $validator->validate($rendezVous);
+
+            return $this->render('rendezVous/create.html.twig', [
+                'form' => $form->createView(),
+                'errors' => $errors,
+            ]);
         }
 
         return $this->render('rendezVous/create.html.twig', [
             'form' => $form->createView(),
+            'errors' => null,
         ]);
     }
 }

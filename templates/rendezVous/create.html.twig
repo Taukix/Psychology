@@ -9,20 +9,32 @@
                             <h2 class="site-section-heading text-center">Rendez-Vous</h2>
                           </div>
                         </div>
+                        {{ form_errors(form) }}
+                            {% block field_errors %}
+                                    {% if errors|length > 0 %}
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                {% for error in errors %}
+                                                    <li>{{ error.message }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    {% endif %}
+                            {% endblock %}
                         {{ form_start(form) }}
                             <div class="form-group">
                                 {{ form_label(form.title) }}
-                                {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_widget(form.title, {'attr': {'class': 'form-control', 'placeholder': 'RDV avec ...'}}) }}
                             </div>
 
                             <div class="form-group">
                                 {{ form_label(form.description) }}
-                                {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Description du RDV'}}) }}
                             </div>
 
                             <div class="form-group">
                                 {{ form_label(form.start) }}
-                                {{ form_widget(form.start) }}
+                                {{ form_widget(form.start, {'attr': {'class': 'd-flex flex-row align-items-center justify-content-around'}}) }}
                             </div>
 
                             <button type="submit" class="btn btn-primary w-100 mt-3">Prendre Rendez-Vous</button>
