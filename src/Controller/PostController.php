@@ -17,12 +17,12 @@ class PostController extends AbstractController
     #[Route('/posts', name: 'app_posts')]
     public function index(PersistenceManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response
     {
-        $entityManager = $doctrine->getManager();
-        $postRepository = $entityManager->getRepository(Post::class);
-        $posts = $postRepository->findAll();
+        $em = $doctrine->getManager();
 
         $posts = $paginator->paginate(
-            $posts,
+            $em->getRepository(Post::class)->createQueryBuilder('p')
+                ->orderBy('p.modified_at', 'DESC')
+                ->getQuery(),
             $request->query->getInt('page', 1),
             3
         );

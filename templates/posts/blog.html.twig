@@ -16,11 +16,11 @@
                                     <div class="col text-center p-4 ml-2">
                                       <div class="h-entry">
                                         <h2 class="font-size-regular">{{ post.title }}</h2>
-                                        <div class="meta mb-4 text-secondary">{{ post.getPostUser.firstName }}{{ post.getPostUser.lastName }} <span class="mx-2">&bullet;</span>{{ post.getCreatedAt|date('d-m-Y à H:i') }}</div>
+                                        <div class="meta mb-4 text-secondary">{{ post.getPostUser.firstName }}{{ post.getPostUser.lastName }} <span class="mx-2">&bullet;</span>{{ post.getModifiedAt|date('d-m-Y à H:i') }}</div>
                                         <p class="text-secondary">{{ post.description }}</p>
                                         {% if post.getPostUser.getId == app.user.id or 'ROLE_ADMIN' in app.user.roles %}
-                                            <a href="{{ path('app_post_edit', {'id': post.id}) }}" class="btn btn-light px-4 py-2 btn-sm">Modifier</a>
-                                            <a href="{{ path('app_post_delete', {'id': post.id}) }}" class="btn btn-danger px-4 py-2 btn-sm">Supprimer</a>
+                                            <a href="{{ path('app_post_edit', {'id': post.id}) }}" class="mr-3"><img src="{{asset('edit.png')}}" alt="edit" width="20px" height="20px"></a>
+                                            <a href="{{ path('app_post_delete', {'id': post.id}) }}"><img src="{{asset('bin.png')}}" alt="bin" width="20px" height="20px"></a>
                                         {% endif %}
                                       </div> 
                                     </div>

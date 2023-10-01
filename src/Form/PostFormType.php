@@ -17,22 +17,26 @@ class PostFormType extends AbstractType
             ->add('title', TextType::class, [
                 'label' => 'Titre',
                 'required' => true,
-                new Length([
-                    'min' => 10,
-                    'minMessage' => 'Le titre doit contenir au moins {{ limit }} caractères',
-                    'max' => 50,
-                    'maxMessage' => 'Le titre doit contenir au maximum {{ limit }} caractères',
-                ]),
+                'constraints' => [
+                    new Length([
+                        'min' => 5,
+                        'minMessage' => 'Le titre doit contenir au moins {{ limit }} caractères',
+                        'max' => 50,
+                        'maxMessage' => 'Le titre doit contenir au maximum {{ limit }} caractères',
+                    ]),
+                ],
             ])
             ->add('description', TextType::class, [
                 'label' => 'Description',
                 'required' => true,
-                new Length([
-                    'min' => 10,
-                    'minMessage' => 'La description doit contenir au moins {{ limit }} caractères',
-                    'max' => 100,
-                    'maxMessage' => 'La description doit contenir au maximum {{ limit }} caractères',
-                ]),
+                'constraints' => [
+                    new Length([
+                        'min' => 5,
+                        'minMessage' => 'La description doit contenir au moins {{ limit }} caractères',
+                        'max' => 200,
+                        'maxMessage' => 'La description doit contenir au maximum {{ limit }} caractères',
+                    ]),
+                ],
             ])
         ;
     }
