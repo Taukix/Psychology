@@ -21,6 +21,10 @@
                                     <h5 class="text-white"><i class="mr-3 text-uppercase">Adresse :</i> {{ rendezVous.title }}</h5>
                                     <h5 class="text-white"><i class="mr-3 text-uppercase">Ville :</i> {{ rendezVous.description }}</h5>
                                   </div>
+                                  <div class="col-md-12 mt-3">
+                                    <a href="{{ path('app_rdv_edit', {'id': rendezVous.id}) }}" class="btn btn-light text-primary btn-sm">Modifier</a>
+                                    <a href="{{ path('app_rdv_delete', {'id': rendezVous.id}) }}" class="btn btn-danger btn-sm ml-3">Supprimer</a>
+                                  </div>
                                 </div>
                               </div>
                         </div>

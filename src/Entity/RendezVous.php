@@ -11,13 +11,6 @@ use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
 #[ORM\Entity(repositoryClass: RendezVousRepository::class)]
 class RendezVous
 {
-    private $doctrine;
-
-    public function __construct(PersistenceManagerRegistry $doctrine)
-    {
-        $this->doctrine = $doctrine;
-    }
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -33,7 +26,6 @@ class RendezVous
     #[Assert\GreaterThan(value: "today", message: "La date et l'heure doivent être supérieures à aujourd'hui.")]
     #[Assert\Expression("this.getHour() >= 8 && this.getHour() <= 11 || this.getHour() >= 13 && this.getHour() <= 17", message: "L'heure doit être entre 8h-11h ou 13h-17h compris.")]
     #[Assert\Expression("this.getStart().format('N') < 6", message: "Le rendez-vous ne peut pas être pris le week-end")]
-    #[Assert\Expression("this.isStartDateUnique() === true", message: "Un rendez-vous existe déjà à cette date et heure.")]
     private ?\DateTimeInterface $start = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -137,9 +129,10 @@ class RendezVous
         return $this->start->format('H');
     }
 
-    public function isStartDateUnique()
+    public function isStartDateUnique(): bool
     {
-        $em = $this->doctrine->getManager();
+        $doctrine = new PersistenceManagerRegistry();
+        $em = $doctrine->getManager();
         $existingRendezVous = $em->getRepository(RendezVous::class)->findOneBy(['start' => $this->start]);
 
         if ($existingRendezVous && $existingRendezVous->getId() !== $this->getId()) {
