@@ -45,7 +45,12 @@ class RegistrationFormType extends AbstractType
                     ]),
                     new Email([
                         'message' => 'Veuillez entrer une adresse email valide',
-                    ])
+                    ]),
+                    new Callback(function ($email, $context) {
+                        if (preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-zA-Z]{2,4}$/', $email)) {
+                            $context->addViolation('Veuillez entrer une adresse email valide');
+                        }
+                    }),
                 ],
             ])
             ->add('phoneNumber', null, [
