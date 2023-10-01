@@ -13,11 +13,11 @@
                         <div class="row">
                             {% for post in posts %}
                                 {% if post.getState == 'Validé' %}
-                                    <div class="col text-center p-4 ml-2" style="background-color: #25325b; border-radius: 30px;">
+                                    <div class="col text-center p-4 ml-2">
                                       <div class="h-entry">
-                                        <h2 class="font-size-regular text-white">{{ post.title }}</h2>
-                                        <div class="meta mb-4 text-white">{{ post.getPostUser.firstName }}{{ post.getPostUser.lastName }} <span class="mx-2">&bullet;</span>{{ post.getCreatedAt|date('d-m-Y à H:i') }}</div>
-                                        <p class="text-white">{{ post.description }}</p>
+                                        <h2 class="font-size-regular">{{ post.title }}</h2>
+                                        <div class="meta mb-4 text-secondary">{{ post.getPostUser.firstName }}{{ post.getPostUser.lastName }} <span class="mx-2">&bullet;</span>{{ post.getCreatedAt|date('d-m-Y à H:i') }}</div>
+                                        <p class="text-secondary">{{ post.description }}</p>
                                         {% if post.getPostUser.getId == app.user.id or 'ROLE_ADMIN' in app.user.roles %}
                                             <a href="{{ path('app_post_edit', {'id': post.id}) }}" class="btn btn-light px-4 py-2 btn-sm">Modifier</a>
                                             <a href="{{ path('app_post_delete', {'id': post.id}) }}" class="btn btn-danger px-4 py-2 btn-sm">Supprimer</a>
