@@ -10,7 +10,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
 use App\Entity\RendezVous;
 use App\Form\RendezVousFormType;
-use SebastianBergmann\Environment\Console;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class RendezVousController extends AbstractController

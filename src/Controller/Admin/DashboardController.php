@@ -12,6 +12,7 @@ use App\Controller\Admin\UsersCrudController;
 use App\Entity\Users;
 use App\Entity\RendezVous;
 use App\Controller\Admin\RendezVousCrudController;
+use App\Entity\Post;
 
 class DashboardController extends AbstractDashboardController
 {
@@ -34,5 +35,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToRoute('Retour à l\'acceuil', 'fa fa-home', 'app_home');
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-list', Users::class);
         yield MenuItem::linkToCrud('Rendez-vous', 'fas fa-list', RendezVous::class);
+        yield MenuItem::linkToCrud('Posts', 'fas fa-list', Post::class);
     }
 }
