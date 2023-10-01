@@ -60,6 +60,11 @@ class RegistrationFormType extends AbstractType
                         'max' => 10,
                         'maxMessage' => 'Votre numéro de téléphone doit contenir au maximum {{ limit }} caractères',
                     ]),
+                    new Callback(function ($phoneNumber, $context) {
+                        if (!preg_match('/^[0-9]*$/', $phoneNumber)) {
+                            $context->addViolation('Votre numéro de téléphone ne doit contenir que des chiffres');
+                        }
+                    }),
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
