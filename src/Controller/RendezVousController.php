@@ -12,10 +12,12 @@ use App\Entity\RendezVous;
 use App\Form\RendezVousFormType;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+use function Symfony\Component\Clock\now;
+
 class RendezVousController extends AbstractController
 {
     #[Route('/rendez-vous', name: 'app_rdv')]
-    public function index(RendezVousRepository $rdv): Response
+    public function index(RendezVousRepository $rdv, PersistenceManagerRegistry $doctrine): Response
     {
         $events = $rdv->findAll();
 
@@ -23,6 +25,14 @@ class RendezVousController extends AbstractController
 
         foreach ($events as $event) {
             if ($event->getState() === 'Annulé') continue;
+            
+            if (now() > $event->getEndDatetime()) { 
+                $event->setState('Passé');
+                $entityManager = $doctrine->getManager();
+                $entityManager->persist($event);
+                $entityManager->flush();
+            };
+
             $backgroundColor = ($event->getState() === 'Passé') ? '#D3D3D3' : '#25325b';
             $textColor = ($event->getState() === 'Passé') ? '#000' : '#fff';
 
@@ -68,11 +78,6 @@ class RendezVousController extends AbstractController
                 'errors' => $errors,
             ]);
         }
-
-        return $this->render('rendezVous/create.html.twig', [
-            'form' => $form->createView(),
-            'errors' => null,
-        ]);
     }
 
     #[Route('/rendez-vous/{id}', name: 'app_rdv_show')]
@@ -103,18 +108,18 @@ class RendezVousController extends AbstractController
             return $this->render('rendezVous/edit.html.twig', [
                 'form' => $form->createView(),
                 'errors' => $errors,
+                'rendezVous' => $rendezVous,
             ]);
         }
-
-        return $this->render('rendezVous/edit.html.twig', [
-            'form' => $form->createView(),
-            'errors' => null,
-        ]);
     }
 
     #[Route('/rendez-vous/{id}/delete', name: 'app_rdv_delete')]
     public function delete(RendezVous $rendezVous, PersistenceManagerRegistry $doctrine): Response
     {
+        if ($rendezVous->getRdvUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException('Vous n\'avez pas le droit de supprimer ce rendez-vous');
+        }
+
         $rendezVous->setState('Annulé');
         $entityManager = $doctrine->getManager();
         $entityManager->persist($rendezVous);

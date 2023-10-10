@@ -87,19 +87,19 @@ class PostController extends AbstractController
 
             return $this->render('posts/edit.html.twig', [
                 'form' => $form->createView(),
-                'errors' => $errors,
+                'errors' => null,
+                'post' => $post,
             ]);
         }
-
-        return $this->render('posts/edit.html.twig', [
-            'form' => $form->createView(),
-            'errors' => null,
-        ]);
     }
 
     #[Route('/posts/{id}/delete', name: 'app_post_delete')]
     public function delete(Post $post, PersistenceManagerRegistry $doctrine): Response
     {
+        if ($post->getPostUser() != $this->getUser()) {
+            throw $this->createAccessDeniedException('Vous n\'avez pas le droit de supprimer ce post');
+        }
+
         $post->setModifiedAt(new \DateTimeImmutable('now'));
         $post->setState('Supprimé');
         $entityManager = $doctrine->getManager();

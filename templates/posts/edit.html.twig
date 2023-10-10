@@ -1,42 +1,55 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <div class="w-100"></div>
-    <section class="site-section" id="blog-section">
-        <div class="container" style="margin-top: 100px">
-            <div class="row justify-content-center mb-5 align-items-center">
-                <div class="col-md-8 text-center">
-                    <h2 class="site-section-heading text-center">Modifier le Post</h2>
+    {% if post.getPostUser.id == app.user.id or 'ROLE_ADMIN' in app.user.roles %}
+        <div class="w-100"></div>
+        <section class="site-section" id="blog-section">
+            <div class="container" style="margin-top: 100px">
+                <div class="row justify-content-center mb-5 align-items-center">
+                    <div class="col-md-8 text-center">
+                        <h2 class="site-section-heading text-center">Modifier le Post</h2>
+                    </div>
+                </div>
+
+                {{ form_errors(form) }}
+                {% block field_errors %}
+                    {% if errors|length > 0 %}
+                        <div class="alert alert-danger">
+                            <ul>
+                                {% for error in errors %}
+                                    <li>{{ error.message }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                {% endblock %}
+
+                {{ form_start(form) }}
+                <div class="form-group">
+                    {{ form_label(form.title) }}
+                    {{ form_widget(form.title, {'attr': {'class': 'form-control', 'placeholder': 'Une expérience ...'}}) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.description) }}
+                    {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Description du Post'}}) }}
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 mt-3">Enregistrer les Modifications</button>
+                {{ form_end(form) }}
+            </div>
+        </section>
+    {% else %}
+        <div class="w-100"></div>
+        <section class="site-section" id="blog-section">
+            <div class="container" style="margin-top: 100px">
+                <div class="row justify-content-center mb-5 align-items-center">
+                    <div class="col-md-8 text-center">
+                        <h2 class="site-section-heading text-center">Vous n'avez pas les droits pour modifier ce post</h2>
+                    </div>
                 </div>
             </div>
-            
-            {{ form_errors(form) }}
-            {% block field_errors %}
-                {% if errors|length > 0 %}
-                    <div class="alert alert-danger">
-                        <ul>
-                            {% for error in errors %}
-                                <li>{{ error.message }}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                {% endif %}
-            {% endblock %}
-            
-            {{ form_start(form) }}
-            <div class="form-group">
-                {{ form_label(form.title) }}
-                {{ form_widget(form.title, {'attr': {'class': 'form-control', 'placeholder': 'Une expérience ...'}}) }}
-            </div>
-
-            <div class="form-group">
-                {{ form_label(form.description) }}
-                {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Description du Post'}}) }}
-            </div>
-
-            <button type="submit" class="btn btn-primary w-100 mt-3">Enregistrer les Modifications</button>
-            {{ form_end(form) }}
-        </div>
-    </section>
+        </section>
+    {% endif %}
 </div>
 {% endblock %}
