@@ -46,11 +46,6 @@ class RegistrationFormType extends AbstractType
                     new Email([
                         'message' => 'Veuillez entrer une adresse email valide',
                     ]),
-                    new Callback(function ($email, $context) {
-                        if (preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-zA-Z]{2,4}$/', $email)) {
-                            $context->addViolation('Veuillez entrer une adresse email valide');
-                        }
-                    }),
                 ],
             ])
             ->add('phoneNumber', null, [
@@ -87,6 +82,11 @@ class RegistrationFormType extends AbstractType
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
+                    new Callback(function ($plainPassword, $context) {
+                        if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$/', $plainPassword)) {
+                            $context->addViolation('Votre mot de passe doit contenir au moins une minuscule, une majuscule, un chiffre et un caractère spécial');
+                        }
+                    }),
                 ],
             ])
             ->add('confirmPassword', PasswordType::class, [
