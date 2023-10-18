@@ -9,8 +9,9 @@ use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
 use App\Entity\Post;
 use App\Form\PostFormType;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
+
 
 class PostController extends AbstractController
 {
@@ -19,12 +20,16 @@ class PostController extends AbstractController
     {
         $em = $doctrine->getManager();
 
+        $pageSize = 4;
+
         $posts = $paginator->paginate(
             $em->getRepository(Post::class)->createQueryBuilder('p')
+                ->where('p.state = :state')
+                ->setParameter('state', 'Validé')
                 ->orderBy('p.modified_at', 'DESC')
                 ->getQuery(),
             $request->query->getInt('page', 1),
-            3
+            $pageSize,
         );
 
         return $this->render('posts/blog.html.twig', [

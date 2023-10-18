@@ -78,6 +78,11 @@ class RendezVousController extends AbstractController
                 'errors' => $errors,
             ]);
         }
+
+        return $this->render('rendezVous/create.html.twig', [
+            'form' => $form->createView(),
+            'errors' => $errors ?? [],
+        ]);
     }
 
     #[Route('/rendez-vous/{id}', name: 'app_rdv_show')]
@@ -111,6 +116,12 @@ class RendezVousController extends AbstractController
                 'rendezVous' => $rendezVous,
             ]);
         }
+
+        return $this->render('rendezVous/edit.html.twig', [
+            'form' => $form->createView(),
+            'errors' => $errors ?? [],
+            'rendezVous' => $rendezVous,
+        ]);
     }
 
     #[Route('/rendez-vous/{id}/delete', name: 'app_rdv_delete')]

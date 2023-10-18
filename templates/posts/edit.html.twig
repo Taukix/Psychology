@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block content %}
+{% block body %}
     {% if post.getPostUser.id == app.user.id or 'ROLE_ADMIN' in app.user.roles %}
         <div class="w-100"></div>
         <section class="site-section" id="blog-section">

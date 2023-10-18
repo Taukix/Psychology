@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block content %}
+{% block body %}
     {% if rendezVous.getRdvUser.id == app.user.id or 'ROLE_ADMIN' in app.user.roles %}
         <div class="w-100"></div>
                 <section class="site-section" id="blog-section">
@@ -10,23 +10,22 @@
                                 <h2 class="site-section-heading text-center">Rendez-Vous du {{ rendezVous.start|date('d-m-Y à H:i') }}h</h2>
                               </div>
                             </div>
-                            <div class="row pl-5" style="background-color: #25325b; border-radius: 30px;">
-                              <div class="col-md-12 col-lg-8 main-content">
-                                <div class="row mb-5 mt-5">
-                                  <div class="col-md-12">
-                                    <h5 class="text-white"><i class="mr-3 text-uppercase">Prénom :</i> {{ rendezVous.getRdvUser.firstName }}</h5>
-                                    <h5 class="text-white"><i class="mr-3 text-uppercase">Nom :</i> {{ rendezVous.getRdvUser.lastName }}</h5>
-                                    <h5 class="text-white"><i class="mr-3 text-uppercase">Email :</i> {{ rendezVous.getRdvUser.email }}</h5>
-                                    <h5 class="text-white"><i class="mr-3 text-uppercase">Téléphone :</i> {{ rendezVous.getRdvUser.phoneNumber }}</h5>
-                                    <h5 class="text-white"><i class="mr-3 text-uppercase">Titre :</i> {{ rendezVous.title }}</h5>
-                                    <h5 class="text-white"><i class="mr-3 text-uppercase">Description :</i> {{ rendezVous.description }}</h5>
-                                  </div>
-                                  <div class="col-md-12 mt-3">
-                                    <a href="{{ path('app_rdv_edit', {'id': rendezVous.id}) }}" class="btn btn-light text-primary btn-sm">Modifier</a>
-                                    <a href="{{ path('app_rdv_delete', {'id': rendezVous.id}) }}" class="btn btn-danger btn-sm ml-3">Supprimer</a>
-                                  </div>
+                            <div class="row bg-white rounded">
+                                <div class="col-md-3 p-4 text-center rounded-left" style="background-color: #25325b">
+                                  <p class="text-uppercase mb-0">Prénom</p><span class="text-white mb-2"> {{ rendezVous.getRdvUser.firstName }}</span>
+                                  <p class="text-uppercase mb-0 mt-3">Nom</p><span class="text-white mb-2"> {{ rendezVous.getRdvUser.lastName }}</span>
+                                  <p class="text-uppercase mb-0 mt-3">Email</p><span class="text-white mb-2"> {{ rendezVous.getRdvUser.email }}</span>
+                                  <p class="text-uppercase mb-0 mt-3">Téléphone</p><span class="text-white mb-2"> {{ rendezVous.getRdvUser.phoneNumber }}</span>
+                                  <p class="text-uppercase mb-0 mt-3">Titre</p><span class="text-white mb-2"> {{ rendezVous.title }}</span>
                                 </div>
-                              </div>
+                                <div class="col-md-9 p-4">
+                                  <h4 class="mr-3 text-uppercase text-center mb-4" style="color: #25325b;">Description</h4><span class="text-secondary text-break"> {{ rendezVous.description }}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-3 text-center">
+                              <a href="{{ path('app_rdv_edit', {'id': rendezVous.id}) }}" class="btn btn-light text-primary btn-sm p-2">Modifier</a>
+                              <a href="{{ path('app_rdv_delete', {'id': rendezVous.id}) }}" class="btn btn-danger btn-sm ml-3 p-2">Supprimer</a>
+                            </div>
                         </div>
                 </section>
         </div>

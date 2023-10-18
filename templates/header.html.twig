@@ -1,0 +1,71 @@
+{% extends "base.html.twig" %}
+
+{% block header %}
+<div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+
+    <div class="top-bar py-2" id="home-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 text-center text-lg-right order-lg-2">
+            <ul class="social-media m-0 p-0">
+              <li><a href="#" class="p-2"><span class="icon-facebook"></span></a></li>
+              <li><a href="#" class="p-2"><span class="icon-twitter"></span></a></li>
+              <li><a href="#" class="p-2"><span class="icon-instagram"></span></a></li>
+              <li><a href="#" class="p-2"><span class="icon-linkedin"></span></a></li>
+            </ul>
+          </div>
+          <div class="col-md-6 text-center text-lg-left order-lg-1">
+            <p class="mb-0 d-inline-flex">
+              <span class="mr-3"><a class="d-flex align-items-center"><span class="icon-phone mr-2"></span><span>06 43 24 01 01</span></a></span>
+              <span><a class="d-flex align-items-center"><span class="icon-envelope mr-2"></span><span>psychology@defroment.com</span></a></span>
+            </p>
+          </div>
+
+        </div>
+      </div> 
+    </div>
+
+    <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
+
+      <div class="container">
+        <div class="row align-items-center">
+
+          <div class="col-11 col-xl-2">
+            <h1 class="mb-0 site-logo"><a href="{{ path('app_home') }}" class="mb-0">Psychologie<span class="text-primary">.</span> </a></h1>
+          </div>
+          <div class="col-12 col-md-10 d-none d-xl-block">
+            <nav class="site-navigation position-relative text-right" role="navigation">
+
+              <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
+                <li><a href="{{path('app_home') ~ '#home-section' }}" class="nav-link">Accueil</a></li>
+                <li><a href="{{path('app_home') ~ '#services-section' }}" class="nav-link">Mes services</a></li>
+                <li><a href="{{path('app_about') ~ '#about-section' }}" class="nav-link">A Propos</a></li>
+                <li><a href="{{path('app_rdv') }}" class="nav-link">Rendez-Vous</a></li>
+                <li><a href="{{path('app_posts') }}" class="nav-link">Blog</a></li>
+                {% if is_granted('ROLE_USER') %}
+                  <li><a href="{{path('app_logout') }}" class="nav-link bg-primary text-white rounded">Déconnexion</a></li>
+                {% else %}
+                  <li><a href="{{path('app_login') }}" class="nav-link bg-primary text-white rounded">Connexion</a></li>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                  <li><a href="{{path('admin') }}" class="nav-link bg-primary text-white rounded">Admin</a></li>
+                {% endif %}
+              </ul>
+            </nav>
+          </div>
+
+
+          <div class="d-inline-block d-xl-none ml-md-0 mr-auto py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
+
+        </div>
+      </div>
+      
+    </header>
+{% endblock %}
