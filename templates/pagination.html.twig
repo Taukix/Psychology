@@ -6,10 +6,6 @@
             </li>
         {% endif %}
         
-        {% set maxPagesToShow = 5 %}
-        {% set startPage = max(currentPage - maxPagesToShow // 2, 1) %}
-        {% set endPage = min(currentPage + maxPagesToShow // 2, totalPages) %}
-        
         {% for page in startPage..endPage %}
             {% if page == currentPage %}
                 <li class="page-item">

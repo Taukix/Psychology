@@ -13,7 +13,7 @@
                         <div class="row justify-content-center align-items-center">
                             {% for post in posts %}
                                 {% if post.getState == 'Validé' %}
-                                    <div class="col-5 text-center p-4 bg-white m-3 rounded">
+                                    <div class="col-5 text-center p-4 bg-white m-3 rounded" style="height: 200px;">
                                       <div class="h-entry">
                                         <h2 class="font-size-regular">{{ post.title }}</h2>
                                         <div class="meta mb-4 text-secondary">{{ post.getPostUser.firstName }}{{ post.getPostUser.lastName }} <span class="mx-2">&bullet;</span>{{ post.getModifiedAt|date('d-m-Y à H:i') }}</div>
