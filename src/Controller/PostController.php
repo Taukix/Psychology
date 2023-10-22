@@ -21,19 +21,30 @@ class PostController extends AbstractController
         $em = $doctrine->getManager();
 
         $pageSize = 4;
+        $status = 'Validé';
+        $currentPage = $request->query->getInt('page', 1);
 
         $posts = $paginator->paginate(
             $em->getRepository(Post::class)->createQueryBuilder('p')
                 ->where('p.state = :state')
-                ->setParameter('state', 'Validé')
+                ->setParameter('state', $status)
                 ->orderBy('p.modified_at', 'DESC')
                 ->getQuery(),
-            $request->query->getInt('page', 1),
+            $currentPage,
             $pageSize,
         );
 
+        $totalPages = ceil($posts->getTotalItemCount() / $pageSize);
+        $previousPage = $currentPage > 1 ? $currentPage - 1 : null;
+        $nextPage = $currentPage < $totalPages ? $currentPage + 1 : null;
+
         return $this->render('posts/blog.html.twig', [
             'posts' => $posts,
+            'status' => $status,
+            'currentPage' => $currentPage,
+            'previousPage' => $previousPage,
+            'nextPage' => $nextPage,
+            'totalPages' => $totalPages,
         ]);
     }
 
@@ -92,7 +103,7 @@ class PostController extends AbstractController
 
             return $this->render('posts/edit.html.twig', [
                 'form' => $form->createView(),
-                'errors' => null,
+                'errors' => $errors,
                 'post' => $post,
             ]);
         }
@@ -105,10 +116,8 @@ class PostController extends AbstractController
             throw $this->createAccessDeniedException('Vous n\'avez pas le droit de supprimer ce post');
         }
 
-        $post->setModifiedAt(new \DateTimeImmutable('now'));
-        $post->setState('Supprimé');
         $entityManager = $doctrine->getManager();
-        $entityManager->persist($post);
+        $entityManager->remove($post);
         $entityManager->flush();
 
         return $this->redirectToRoute('app_posts');

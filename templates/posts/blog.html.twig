@@ -29,7 +29,7 @@
                         </div>
                         
                         <div class="pagination row justify-content-center mt-5 align-items-center">
-                            {{ knp_pagination_render(posts) }}
+                            {% include 'pagination.html.twig' %}
                         </div>
 
                         <a href="{{path('app_post_create') }}" class="btn btn-primary px-4 py-2 btn-sm mt-3">Ajouter un Post</a>

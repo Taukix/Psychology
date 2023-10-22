@@ -1,0 +1,31 @@
+<div class="pagination">
+    <ul class="pagination">
+        {% if previousPage is not null %}
+            <li class="page-item">
+                <a class="page-link" href="{{ path('app_posts', {'status': status, 'page': previousPage}) }}">Page précédente</a>
+            </li>
+        {% endif %}
+        
+        {% set maxPagesToShow = 5 %}
+        {% set startPage = max(currentPage - maxPagesToShow // 2, 1) %}
+        {% set endPage = min(currentPage + maxPagesToShow // 2, totalPages) %}
+        
+        {% for page in startPage..endPage %}
+            {% if page == currentPage %}
+                <li class="page-item">
+                    <span class="page-link bg-secondary text-white">{{ page }}</span>
+                </li>
+            {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ path('app_posts', {'status': status, 'page': page}) }}">{{ page }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+        
+        {% if nextPage is not null %}
+            <li class="page-item">
+                <a class="page-link" href="{{ path('app_posts', {'status': status, 'page': nextPage}) }}">Page suivante</a>
+            </li>
+        {% endif %}
+    </ul>
+</div>
