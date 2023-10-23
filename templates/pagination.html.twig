@@ -1,6 +1,10 @@
 <div class="pagination">
     <ul class="pagination">
-        {% if previousPage is not null %}
+        {% if currentPage == 1 %}
+            {% set startPage = 1 %}
+        {% endif %}
+
+        {% if previousPage is not null and currentPage > 1 %}
             <li class="page-item">
                 <a class="page-link" href="{{ path('app_posts', {'status': status, 'page': previousPage}) }}">Page précédente</a>
             </li>

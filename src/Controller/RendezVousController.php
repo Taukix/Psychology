@@ -70,18 +70,13 @@ class RendezVousController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('app_rdv');
-        } else if ($form->isSubmitted() && !$form->isValid()) {
-            $errors = $validator->validate($rendezVous);
-
-            return $this->render('rendezVous/create.html.twig', [
-                'form' => $form->createView(),
-                'errors' => $errors,
-            ]);
         }
+
+        $errors = $form->getErrors(true);
 
         return $this->render('rendezVous/create.html.twig', [
             'form' => $form->createView(),
-            'errors' => $errors ?? [],
+            'errors' => $errors,
         ]);
     }
 
@@ -131,9 +126,8 @@ class RendezVousController extends AbstractController
             throw $this->createAccessDeniedException('Vous n\'avez pas le droit de supprimer ce rendez-vous');
         }
 
-        $rendezVous->setState('Annulé');
         $entityManager = $doctrine->getManager();
-        $entityManager->persist($rendezVous);
+        $entityManager->remove($rendezVous);
         $entityManager->flush();
 
         return $this->redirectToRoute('app_rdv');

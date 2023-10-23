@@ -23,9 +23,6 @@ class RendezVous
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Assert\GreaterThan(value: "today", message: "La date et l'heure doivent être supérieures à aujourd'hui.")]
-    #[Assert\Expression("this.getHour() >= 8 && this.getHour() <= 11 || this.getHour() >= 13 && this.getHour() <= 17", message: "L'heure doit être entre 8h-11h ou 13h-17h compris.")]
-    #[Assert\Expression("this.getStart().format('N') < 6", message: "Le rendez-vous ne peut pas être pris le week-end")]
     private ?\DateTimeInterface $start = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]

@@ -35,11 +35,19 @@ class PostController extends AbstractController
         );
 
         $totalPages = ceil($posts->getTotalItemCount() / $pageSize);
-        $previousPage = $currentPage > 1 ? $currentPage - 1 : null;
-        $nextPage = $currentPage < $totalPages ? $currentPage + 1 : null;
         $maxPages = 3;
-        $startPage = $currentPage - floor($maxPages / 2);
-        $endPage = $currentPage + floor($maxPages / 2);
+
+        if ($currentPage < $totalPages) {
+            $previousPage = $currentPage > 1 ? $currentPage - 1 : null;
+            $nextPage = $currentPage < $totalPages ? $currentPage + 1 : null;
+            $startPage = $currentPage - floor($maxPages / 2);
+            $endPage = $currentPage + floor($maxPages / 2);
+        } else {
+            $previousPage = $currentPage > 1 ? $currentPage - 1 : null;
+            $nextPage = null;
+            $startPage = $currentPage - floor($maxPages / 2);
+            $endPage = $currentPage;
+        }
 
         return $this->render('posts/blog.html.twig', [
             'posts' => $posts,
