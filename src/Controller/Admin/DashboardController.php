@@ -11,7 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use App\Controller\Admin\UsersCrudController;
 use App\Entity\Users;
 use App\Entity\RendezVous;
-use App\Controller\Admin\RendezVousCrudController;
+use App\Entity\ContactMessage;
 use App\Entity\Post;
 
 class DashboardController extends AbstractDashboardController
@@ -36,5 +36,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-list', Users::class);
         yield MenuItem::linkToCrud('Rendez-vous', 'fas fa-list', RendezVous::class);
         yield MenuItem::linkToCrud('Posts', 'fas fa-list', Post::class);
+        yield MenuItem::linkToCrud('Contact', 'fas fa-list', ContactMessage::class);
     }
 }

@@ -1,0 +1,62 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<section class="site-section" id="contact-section">
+    <div class="container" style="margin-top: 100px">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h2 class="site-section-heading">{{ 'Contactez-moi'|trans }}</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mb-5">
+
+                {{ form_start(form, {'attr': {'class': 'p-5 bg-white rounded'}}) }}
+
+                <h2 class="h4 mb-5">{{ 'Formulaire de Contact' }}</h2> 
+
+                <div class="row form-group">
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        {{ form_label(form.firstName) }}
+                        {{ form_widget(form.firstName, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_label(form.lastName) }}
+                        {{ form_widget(form.lastName, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        {{ form_label(form.email) }}
+                        {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        {{ form_label(form.subject) }}
+                        {{ form_widget(form.subject, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        {{ form_label(form.message) }}
+                        {{ form_widget(form.message, {'attr': {'class': 'form-control', 'rows': 5}}) }}
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <input type="submit" value="{{ 'Envoyer'|trans }}" class="btn btn-primary btn-md text-white">
+                    </div>
+                </div>
+
+                {{ form_end(form) }}
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}
