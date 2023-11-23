@@ -88,4 +88,4 @@ Accédez au site à l'adresse `http://localhost` dans votre navigateur.
 
 ---
 
-En résumé, mon projet "Psychology" avec Symfony et Docker a été une expérience enrichissante qui m'a permis de développer et de mettre en pratique des compétences essentielles en développement web, gestion de données, utilisation d'outils numériques, exploitation de données, ainsi qu'en expression et communication écrites et orales. Ces compétences constituent une base solide pour aborder des projets futurs dans le domaine du développement logiciel et de la gestion de l'information.
+En résumé, mon projet "Psychology" avec Symfony et Docker a été une expérience enrichissante qui m'a permis de développer et de mettre en pratique des compétences essentielles en développement web, gestion de données, utilisation d'outils numériques, exploitation de données, ainsi qu'en expression et communication écrites et orales. Ces compétences constituent une base solide pour aborder des projets futurs dans le domaine du développement Web et de la gestion de l'information.
