@@ -1,48 +1,79 @@
-# Symfony Docker
+# Site Web "Psychology" - Symfony & Docker
 
-A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework,
-with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) inside!
+Bienvenue sur le site **Psychology**, une plateforme dédiée à la psychologie, développée avec Symfony et Docker. Ce site offre une variété de fonctionnalités pour faciliter la communication entre la psychologue et les utilisateurs.
 
-![CI](https://github.com/dunglas/symfony-docker/workflows/CI/badge.svg)
+## Fonctionnalités Principales
 
-## Getting Started
+### Espace Administrateur
 
-1. If not already done, [install Docker Compose](https://docs.docker.com/compose/install/) (v2.10+)
-2. Run `docker compose build --no-cache` to build fresh images
-3. Run `docker compose up --pull --wait` to start the project
-4. Open `https://localhost` in your favorite web browser and [accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334)
-5. Run `docker compose down --remove-orphans` to stop the Docker containers.
+- EasyAdminBundle : Utilisation d'EasyAdminBundle pour créer une interface d'administration conviviale. La psychologue peut accéder à cet espace pour gérer les messages laissés par les utilisateurs.
+  
+### Authentification et Inscription
 
-## Features
+- Sécurité : Mise en place d'un système d'authentification sécurisé pour permettre à la psychologue de se connecter à son espace administrateur. Les utilisateurs peuvent également s'inscrire pour accéder à des fonctionnalités spécifiques.
 
-* Production, development and CI ready
-* Just 1 service by default
-* Blazing-fast performance thanks to [the worker mode of FrankenPHP](https://github.com/dunglas/frankenphp/blob/main/docs/worker.md) (automatically enabled in prod mode)
-* [Installation of extra Docker Compose services](docs/extra-services.md) with Symfony Flex
-* Automatic HTTPS (in dev and prod)
-* HTTP/3 and [Early Hints](https://symfony.com/blog/new-in-symfony-6-3-early-hints) support
-* Real-time messaging thanks to a built-in [Mercure hub](https://symfony.com/doc/current/mercure.html)
-* [Vulcain](https://vulcain.rocks) support
-* Native [XDebug](docs/xdebug.md) integration
-* Super-readable configuration
+### Prise de Rendez-vous
 
-**Enjoy!**
+- Formulaire : Intégration d'un formulaire pour la prise de rendez-vous. Les utilisateurs peuvent remplir les informations nécessaires et soumettre leurs demandes.
+- CRUD : Mise en place des opérations CRUD (Create, Read, Update, Delete) pour gérer les rendez-vous.
 
-## Docs
+### Blog
 
-1. [Build options](docs/build.md)
-2. [Using Symfony Docker with an existing project](docs/existing-project.md)
-3. [Support for extra services](docs/extra-services.md)
-4. [Deploying in production](docs/production.md)
-5. [Debugging with Xdebug](docs/xdebug.md)
-6. [TLS Certificates](docs/tls.md)
-7. [Using a Makefile](docs/makefile.md)
-8. [Troubleshooting](docs/troubleshooting.md)
+- CRUD : Mise en place des opérations CRUD (Create, Read, Update, Delete) pour gérer les critiques sur la page.
+- Pagination : Utilisation de Paginator pour une navigation facile à travers les articles du blog.
 
-## License
+### Page de Contact
 
-Symfony Docker is available under the MIT License.
+- Formulaire : Création d'un formulaire de contact permettant aux utilisateurs de laisser des messages ou poser des questions directement à la psychologue.
 
-## Credits
+### Partie Publique
 
-Created by [Kévin Dunglas](https://dunglas.dev), co-maintained by [Maxime Helias](https://twitter.com/maxhelias) and sponsored by [Les-Tilleuls.coop](https://les-tilleuls.coop).
+- Détail : Affichage détaillé des informations sur la psychologue, ses services, et tout autre contenu pertinent pour les utilisateurs.
+
+---
+
+## Installation et Exécution
+
+Clônez le repository sur votre machine locale.
+
+```
+git clone https://github.com/votre-utilisateur/psychology.git
+```
+
+Assurez-vous que Docker est installé sur votre système.
+
+### Exécutez les conteneurs Docker.
+
+```
+docker-compose up -d
+```
+
+Accédez au site à l'adresse `http://localhost` dans votre navigateur.
+
+---
+
+## Compétences
+
+À travers la conception et la réalisation du site "Psychology" avec Symfony et Docker, j'ai acquis et développé un ensemble de compétences diverses, couvrant plusieurs aspects du développement logiciel et de la gestion de projet. Voici comment je peux exprimer ces compétences spécifiques :
+
+### Réaliser un développement d’application :
+
+- J'ai consolidé mon expertise dans le développement d'applications web en utilisant le framework Symfony. La mise en œuvre de fonctionnalités telles que l'authentification, la gestion de formulaires, et l'intégration de packages comme EasyAdminBundle illustre ma capacité à concevoir et à développer des applications robustes.
+
+### Gérer des données de l’information :
+
+- La mise en place de fonctionnalités telles que la prise de rendez-vous, la gestion des articles de blog, et l'utilisation d'une base de données (probablement grâce à Doctrine avec Symfony) démontre ma compétence dans la gestion efficace de données structurées.
+- J'ai développé la capacité à concevoir des schémas de base de données, à réaliser des opérations CRUD, et à manipuler des informations importantes pour les utilisateurs du site.
+
+### Usages des outils numériques :
+
+- Mon utilisation de Docker pour orchestrer l'environnement de développement et déployer l'application témoigne de ma compétence dans l'utilisation d'outils numériques modernes pour simplifier le processus de développement et de déploiement.
+- L'intégration de Symfony, Docker, et d'autres outils reflète ma capacité à maîtriser des technologies variées pour construire des applications complexes.
+
+### Expression et communication écrites et orales :
+
+- Ma présentation orale concluant le projet a démontré mes compétences en communication orale, expliquant efficacement les choix de conception, les défis surmontés, et les fonctionnalités implémentées.
+
+---
+
+En résumé, mon projet "Psychology" avec Symfony et Docker a été une expérience enrichissante qui m'a permis de développer et de mettre en pratique des compétences essentielles en développement web, gestion de données, utilisation d'outils numériques, exploitation de données, ainsi qu'en expression et communication écrites et orales. Ces compétences constituent une base solide pour aborder des projets futurs dans le domaine du développement logiciel et de la gestion de l'information.
