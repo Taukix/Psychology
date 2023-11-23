@@ -32,6 +32,18 @@ Bienvenue sur le site **Psychology**, une plateforme dédiée à la psychologie,
 
 ---
 
+<div style="display: flex; justify-content: space-between;">
+    <img src="https://github.com/Taukix/Psychology/blob/main/ReadMe_Images/Main.png" width="49%">
+    <img src="https://github.com/Taukix/Psychology/blob/main/ReadMe_Images/About.png" width="49%">
+</div>
+
+<div style="display: flex; justify-content: space-between;">
+    <img src="https://github.com/Taukix/Psychology/blob/main/ReadMe_Images/Rdv.png" width="49%">
+    <img src="https://github.com/Taukix/Psychology/blob/main/ReadMe_Images/Contact.png" width="49%">
+</div>
+
+---
+
 ## Installation et Exécution
 
 Clônez le repository sur votre machine locale.
